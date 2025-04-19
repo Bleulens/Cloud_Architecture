@@ -25,7 +25,7 @@ Follow these steps to set up and initialize your Terraform project:
 1.  **Clone the Repository:**
 
     ```sh
-    git clone [https://github.com/Bleulens/Cloud_Architecture.git](https://github.com/Bleulens/Cloud_Architecture.git)
+    git clone https://github.com/Bleulens/Cloud_Architecture.git
     cd Cloud_Architecture
     ```
 
