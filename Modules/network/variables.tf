@@ -1,36 +1,40 @@
-# CIDR block for the VPC
-# This defines the overall network range that all subnets will reside within.
-# Default value is a standard /16 network, providing flexibility for subnet allocation.
+# Variable: vpc_cidr_block
+# Defines the overall network range for the VPC.
+# The default /16 subnet provides flexibility for dividing the VPC into multiple subnets.
 variable "vpc_cidr_block" {
   description = "CIDR block for the VPC"
   type        = string
   default     = "10.0.0.0/16"
 }
 
-# CIDR block for the public subnet
-# This subnet is designated for resources needing direct internet access.
-# Default is now set to a /24 subnet, which provides 256 IP addresses (minus AWS reserved IPs).
-variable "subnet_cidr_block" {
-  description = "CIDR block for the public subnet"
-  type        = string
-  default     = "10.0.0.0/24"
+# Variable: subnet_configs
+# A map of subnet configurations, allowing dynamic subnet creation.
+# Each subnet entry contains:
+# - cidr_block: Defines the subnet’s IP range.
+# - availability_zone: Specifies which AWS availability zone the subnet is placed in.
+# - is_public: Determines if instances launched in this subnet get public IPs.
+
+variable "subnet_configs" {
+  type = map(object({
+    cidr_block        = string
+    availability_zone = string
+    is_public         = bool
+  }))
+
+  # Validation: Ensures all subnet CIDR blocks follow the "10.0.X.0/24" format.
+  validation {
+    condition = alltrue([
+      for subnet in values(var.subnet_configs) : can(regex("^10\\.0\\.[0-9]+\\.0/24$", subnet.cidr_block))
+    ])
+    error_message = "Each subnet CIDR block must follow the 10.0.X.0/24 format."
+  }
 }
 
-# AWS availability zone
-# Determines which Availability Zone (AZ) the subnet will be deployed in.
-# Default is set to "us-east-1a," but can be adjusted for redundancy or multi-AZ deployments.
-variable "availability_zone" {
-  description = "AWS availability zone"
+# Variable: environment
+# Defines the deployment environment (e.g., Dev, Staging, Prod).
+# This value can be leveraged for tagging resources based on the environment.
+variable "environment" {
+  description = "The environment where this VPC is used (e.g., Dev, Staging, Prod)."
   type        = string
-  default     = "us-east-1a"
-}
-
-# CIDR block for the private subnet
-# This subnet is designated for internal resources such as databases and backend services.
-# Unlike the public subnet, this subnet does not provide direct internet access.
-# Default is now set to a /24 subnet, ensuring separation between public and private resources.
-variable "private_subnet_cidr_block" {
-  description = "CIDR block for the private subnet"
-  type        = string
-  default     = "10.0.2.0/24" # Default value, override if needed
+  default     = "Dev"
 }
