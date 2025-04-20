@@ -5,18 +5,12 @@ output "vpc_id" {
   value       = aws_vpc.main.id
 }
 
-# Output the ID of the public subnet
-# Used when associating resources like EC2 instances that need internet access.
-output "subnet_id" {
-  description = "ID of the public subnet"
-  value       = aws_subnet.public_subnet.id
+output "public_subnet_ids" {
+  value = { for subnet in aws_subnet.dynamic_subnets : subnet.key => subnet.id if subnet.map_public_ip_on_launch }
 }
 
-# Output the ID of the private subnet
-# Helps link internal resources that do not need direct internet access.
-output "private_subnet_id" {
-  description = "ID of the private subnet"
-  value       = aws_subnet.private_subnet.id
+output "private_subnet_ids" {
+  value = { for subnet in aws_subnet.dynamic_subnets : subnet.key => subnet.id if !subnet.map_public_ip_on_launch }
 }
 
 # Output the CIDR block of the VPC
