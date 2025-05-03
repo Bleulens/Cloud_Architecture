@@ -1,8 +1,21 @@
 # AWS region for deploying cloud resources
-# Determines the region where all infrastructure components will be provisioned.
-# Default is set to "us-east-1," but can be overridden per deployment.
 variable "aws_region" {
-  description = "The AWS region to deploy resources in"
+  description = "The AWS region where infrastructure is deployed"
   type        = string
-  default     = "us-east-1" # Change based on preference
+}
+
+# CIDR block for the VPC
+variable "vpc_cidr_block" {
+  description = "CIDR block defining the VPC boundaries"
+  type        = string
+}
+
+# Map of subnets with configurations (used by the network module)
+variable "subnet_configs" {
+  description = "Configuration map for dynamically creating subnets"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = string
+    is_public         = bool
+  }))
 }

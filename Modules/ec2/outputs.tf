@@ -1,17 +1,13 @@
-# Output the IDs of all created instances
+# Output instance IDs for reference in other modules
+# Useful for attaching security groups or tracking deployments
 output "instance_ids" {
-  description = "List of EC2 instance IDs"
+  description = "List of deployed EC2 instance IDs"
   value       = aws_instance.instances[*].id
 }
 
-# Output the public IPs of instances (useful for SSH or external services)
+# Output public IPs for external access
+# Ensures easy retrieval of public addresses for remote management
 output "public_ips" {
-  description = "List of public IPs of the EC2 instances"
+  description = "Public IP addresses of deployed EC2 instances"
   value       = aws_instance.instances[*].public_ip
-}
-
-# Output private IPs (helpful for internal networking)
-output "private_ips" {
-  description = "List of private IPs of the EC2 instances"
-  value       = aws_instance.instances[*].private_ip
 }

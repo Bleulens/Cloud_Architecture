@@ -18,10 +18,3 @@ resource "aws_subnet" "dynamic_subnets" {
     Environment = var.environment      # Tags the subnet with its environment (e.g., Dev, Staging, Prod).
   }
 }
-
-# Reference the network module from the root module to manage VPC and subnets modularly.
-module "network" {
-  source         = "./modules/network" # Specifies the directory containing the network module.
-  vpc_cidr_block = var.vpc_cidr_block  # Passes the VPC CIDR block variable to the module.
-  subnet_configs = var.subnet_configs  # Provides the subnet configuration map for dynamic creation.
-}
