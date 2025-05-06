@@ -13,8 +13,10 @@ resource "aws_subnet" "dynamic_subnets" {
   availability_zone       = each.value.availability_zone # Deploys subnet in the specified AWS AZ.
   map_public_ip_on_launch = each.value.is_public         # Determines whether instances in this subnet get a public IP.
 
-  tags = {
-    Name        = "Subnet-${each.key}" # Assigns a unique name to each subnet based on its key.
-    Environment = var.environment      # Tags the subnet with its environment (e.g., Dev, Staging, Prod).
-  }
+  # Combines the standard tags from var.default_tags with a dynamic Name tag
+  # Each subnet gets a unique name formatted as "Subnet-<key>" based on its identifier
+  tags = merge(var.default_tags, {
+    Name = "Subnet-${each.key}"
+  })
+
 }
