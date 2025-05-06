@@ -11,9 +11,8 @@ resource "aws_instance" "instances" {
   instance_type = var.instance_type                       # Allows projects to define their own instance type
   subnet_id     = var.subnet_id                           # Ensures instances are placed in a valid VPC subnet
 
-  # Instance tagging to support multi-environment management
-  tags = {
-    Name        = "EC2-${count.index + 1}" # Generates unique names dynamically
-    Environment = var.environment          # Labels instances with environment type
-  }
+  # Combines the standard tags from var.default_tags with a dynamic Name tag using merge function
+  tags = merge(var.default_tags, {
+    Name = "EC2-${count.index + 1}" # Generates unique instance names dynamically
+  })
 }
