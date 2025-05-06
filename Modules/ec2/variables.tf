@@ -16,8 +16,9 @@ variable "subnet_id" {
   type        = string
 }
 
-# AWS environment tag (For multi-environment management)
-variable "environment" {
-  description = "Deployment environment identifier"
-  type        = string
+# Defines a standard set of tags to be applied across all Terraform-managed resources.
+# This variable allows consistent tagging for better organization, cost tracking, and automation.
+variable "default_tags" {
+  description = "Standard tags passed from root module"
+  type        = map(string)
 }

@@ -30,11 +30,10 @@ variable "subnet_configs" {
   }
 }
 
-# Variable: environment
-# Defines the deployment environment (e.g., Dev, Staging, Prod).
-# This value can be leveraged for tagging resources based on the environment.
-variable "environment" {
-  description = "The environment where this VPC is used (e.g., Dev, Staging, Prod)."
-  type        = string
-  default     = "Dev"
+
+# Defines a standard set of tags to be applied across all Terraform-managed resources.
+# This variable allows consistent tagging for better organization, cost tracking, and automation.
+variable "default_tags" {
+  description = "Standard tags passed from root module"
+  type        = map(string)
 }
