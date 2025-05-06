@@ -29,4 +29,8 @@ resource "aws_security_group" "this" {
       cidr_blocks = egress.value["cidr_blocks"] # Restricts where outbound traffic is sent
     }
   }
+
+  # Assigns standardized tags to this resource using the default_tags variable.
+  # Ensures consistency across all Terraform-managed resources while allowing central tag management.
+  tags = var.default_tags
 }
