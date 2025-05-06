@@ -19,3 +19,15 @@ variable "subnet_configs" {
     is_public         = bool
   }))
 }
+
+# Defines a set of default tags applied across all resources.
+# Helps ensure consistency in tagging for organization, tracking, and automation.
+variable "default_tags" {
+  description = "Standard tags for all resources"
+  type        = map(string)
+  default = {
+    Environment = "production"
+    Application = "serviceA"
+  }
+}
+
