@@ -19,11 +19,12 @@ output "private_subnet_ids" {
 # Outputs the Internet Gateway ID (if created).
 output "internet_gateway_id" {
   description = "ID of the Internet Gateway"
-  value       = length(aws_internet_gateway.igw) > 0 ? aws_internet_gateway.igw[0].id : null
+  value       = var.create_internet_gateway ? aws_internet_gateway.igw[0].id : null
 }
 
 # Outputs the NAT Gateway ID (if created).
 output "nat_gateway_id" {
   description = "ID of the NAT Gateway"
-  value       = length(aws_nat_gateway.nat) > 0 ? aws_nat_gateway.nat[0].id : null
+  value       = var.create_nat_gateway ? aws_nat_gateway.nat[0].id : null
 }
+
