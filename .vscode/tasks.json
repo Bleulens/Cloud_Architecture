@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Terraform Init - Infrastructure",
+      "type": "shell",
+      "command": "terraform init 2> ${workspaceFolder}/logs/error.log | tee ${workspaceFolder}/logs/infrastructure-init.log",
+      "options": { "cwd": "${workspaceFolder}/Infrastructure" },
+      "problemMatcher": []
+      // Initializes Terraform in the Infrastructure directory.
+      // This sets up the backend and downloads required provider plugins.
+      // Error output is logged separately to help with debugging.
+    },
+    {
+      "label": "Terraform Apply - Infrastructure",
+      "type": "shell",
+      "command": "terraform apply -auto-approve 2> ${workspaceFolder}/logs/error.log | tee ${workspaceFolder}/logs/infrastructure.log",
+      "options": { "cwd": "${workspaceFolder}/Infrastructure" },
+      "problemMatcher": []
+      // Applies Terraform changes in the Infrastructure directory.
+      // This ensures backend and foundational resources are deployed first.
+      // Auto-approve bypasses manual confirmation, useful for automation.
+    },
+    {
+      "label": "Terraform Apply - Resources",
+      "type": "shell",
+      "command": "terraform apply -auto-approve 2> ${workspaceFolder}/logs/error.log | tee ${workspaceFolder}/logs/resources.log",
+      "options": { "cwd": "${workspaceFolder}/Resources" },
+      "problemMatcher": []
+      // Applies Terraform changes in the Resources directory.
+      // This deploys application-specific resources after infrastructure setup.
+      // Logs are stored separately for better tracking.
+    },
+    {
+      "label": "Run Cleanup Script",
+      "type": "shell",
+      "command": "bash cleanup.sh 2> ${workspaceFolder}/logs/error.log | tee ${workspaceFolder}/logs/cleanup.log",
+      "problemMatcher": []
+      // Executes a cleanup script to remove unused or orphaned resources.
+      // This helps maintain a clean cloud environment.
+      // Errors are logged separately to detect any failures.
+    },
+    {
+      "label": "Full Deployment",
+      "dependsOn": [
+        "Terraform Apply - Infrastructure",
+        "Terraform Apply - Resources"
+      ],
+      "runOptions": { "runOn": "folderOpen" }
+      // Runs both infrastructure and resources deployment sequentially.
+      // Ensures proper execution order so infrastructure is established first.
+      // Triggers automatically when the project folder is opened.
+    }
+  ]
+}
