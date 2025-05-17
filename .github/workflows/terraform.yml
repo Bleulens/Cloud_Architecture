@@ -1,0 +1,25 @@
+name: Terraform Manual Execution
+
+on: workflow_dispatch # Allows manual execution ONLY
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3 # Pulls the latest code from GitHub
+
+      - name: Set Up Terraform
+        uses: hashicorp/setup-terraform@v2 # Installs Terraform
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: Infrastructure # Ensures it runs inside the correct folder
+
+      - name: Plan Terraform Changes
+        run: terraform plan
+        working-directory: Infrastructure
+
+      - name: Apply Terraform Changes (Disabled)
+        run: echo "Terraform Apply is currently disabled."
+        working-directory: Infrastructure
