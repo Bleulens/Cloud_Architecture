@@ -22,3 +22,18 @@ subnet_configs = {
     is_public         = true
   }
 }
+
+# Override default tags for this specific deployment
+# default_tags = {
+#   Environment   = "staging"                             #  Override environment
+#   Application   = "serviceB"                            #  Customize application name
+#   Owner         = "Marvin"                              #  Keep owner tracking
+#   CreatedAt     = formatdate("YYYY-MM-DD", timestamp()) #  Auto-generate timestamp
+#   ModuleVersion = "v2.2"                                #  Update module version dynamically
+# }
+
+# Control which modules are deployed
+deploy_application = false
+deploy_compute     = false
+deploy_database    = false
+deploy_storage     = false
