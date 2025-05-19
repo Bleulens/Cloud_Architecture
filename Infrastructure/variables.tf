@@ -26,12 +26,11 @@ variable "default_tags" {
   description = "Global tags for all resources"
   type        = map(string)
   default = {
-    Environment   = "development"      # Defines the deployment environment
-    Application   = "serviceA"        # Identifies the application using these resources
-    Owner         = "Marvin"          # Tracks ownership of deployed infrastructure
-    CreatedAt     = formatdate("YYYY-MM-DD", timestamp())  # Auto-generates deployment timestamp
-    ModuleVersion = "v2.1"            # Keeps track of module versioning for consistency
+    Environment   = "development"                         # Defines the deployment environment
+    Application   = "serviceA"                            # Identifies the application using these resources
+    Owner         = "Marvin"                              # Tracks ownership of deployed infrastructure
+    CreatedAt     = formatdate("YYYY-MM-DD", timestamp()) # Auto-generates deployment timestamp
+    ModuleVersion = "v2.1"                                # Keeps track of module versioning for consistency
   }
-}
 }
 
