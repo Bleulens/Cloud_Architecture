@@ -46,10 +46,10 @@
         "Terraform Apply - Infrastructure",
         "Terraform Apply - Resources"
       ],
-      "runOptions": { "runOn": "folderOpen" }
+      "runOptions": { "runOn": "manual" }
       // Runs both infrastructure and resources deployment sequentially.
       // Ensures proper execution order so infrastructure is established first.
-      // Triggers automatically when the project folder is opened.
+      // Triggers manually when required.
     }
   ]
 }
