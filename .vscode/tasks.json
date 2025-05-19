@@ -45,8 +45,7 @@
       "dependsOn": [
         "Terraform Apply - Infrastructure",
         "Terraform Apply - Resources"
-      ],
-      "runOptions": { "runOn": "manual" }
+      ]
       // Runs both infrastructure and resources deployment sequentially.
       // Ensures proper execution order so infrastructure is established first.
       // Triggers manually when required.
