@@ -23,11 +23,15 @@ variable "subnet_configs" {
 # Defines a set of default tags applied across all resources.
 # Helps ensure consistency in tagging for organization, tracking, and automation.
 variable "default_tags" {
-  description = "Standard tags for all resources"
+  description = "Global tags for all resources"
   type        = map(string)
   default = {
-    Environment = "production"
-    Application = "serviceA"
+    Environment   = "development"      # Defines the deployment environment
+    Application   = "serviceA"        # Identifies the application using these resources
+    Owner         = "Marvin"          # Tracks ownership of deployed infrastructure
+    CreatedAt     = formatdate("YYYY-MM-DD", timestamp())  # Auto-generates deployment timestamp
+    ModuleVersion = "v2.1"            # Keeps track of module versioning for consistency
   }
+}
 }
 
