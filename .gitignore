@@ -2,6 +2,7 @@
 terraform.dev.tfvars
 *.tfstate
 *.tfstate.backup
+*.tfvars
 
 # Ignore Terraform cache directory
 .terraform/

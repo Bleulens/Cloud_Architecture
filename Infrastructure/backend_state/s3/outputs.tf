@@ -1,4 +1,4 @@
-output "s3_bucket_arn" {
+output "state_storage_arn" {
   value       = aws_s3_bucket.state_storage.arn
   description = "The ARN (Amazon Resource Name) of the Terraform state bucket. This uniquely identifies the bucket within AWS."
 }
