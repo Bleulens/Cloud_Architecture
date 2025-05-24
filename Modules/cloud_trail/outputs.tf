@@ -7,11 +7,11 @@ output "trail_name" {
 # Outputs the CloudTrail log bucket name for reference in other modules
 output "s3_bucket_name" {
   description = "S3 bucket where CloudTrail logs are stored"
-  value       = var.s3_bucket_name
+  value       = module.s3.bucket_name
 }
 
 # Outputs the IAM role ARN used by CloudTrail for permissions
 output "cloud_watch_logs_role_arn" {
   description = "IAM role ARN for CloudTrail log delivery"
-  value       = var.cloud_watch_logs_role_arn
+  value       = module.iam.role_arn
 }
