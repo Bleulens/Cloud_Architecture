@@ -34,3 +34,42 @@ variable "default_tags" {
   }
 }
 
+# ---------------------------------------
+# Flags to determine which resources to deploy
+# ---------------------------------------
+variable "deploy_application" {
+  description = "Flag to determine whether to deploy the application"
+  type        = bool
+  default     = false
+}
+
+variable "deploy_compute" {
+  description = "Flag to determine whether to deploy the compute resources"
+  type        = bool
+  default     = false
+}
+
+variable "deploy_storage" {
+  description = "Flag to determine whether to deploy the storage resources"
+  type        = bool
+  default     = false
+}
+
+variable "deploy_database" {
+  description = "Flag to determine whether to deploy the database resources"
+  type        = bool
+  default     = false
+}
+
+# ---------------------------------------
+# GitHubActions variables
+# ---------------------------------------
+variable "github_org" {
+  description = "GitHub organization name"
+  type        = string
+}
+
+variable "github_repo" {
+  description = "GitHub repository name"
+  type        = string
+}
