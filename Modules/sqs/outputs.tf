@@ -10,5 +10,5 @@ output "sqs_queue_url" {
 
 output "dlq_arn" {
   description = "ARN of the dead-letter queue"
-  value       = var.enable_dlq ? aws_sqs_queue.dlq[0].arn : null
+  value       = length(aws_sqs_queue.dlq) > 0 ? aws_sqs_queue.dlq[0].arn : null
 }
