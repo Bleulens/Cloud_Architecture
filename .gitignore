@@ -1,5 +1,5 @@
 # Ignore Terraform variables & state files
-terraform.dev.tfvars
+terraform.tfvars
 *.tfstate
 *.tfstate.backup
 *.tfvars
