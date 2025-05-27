@@ -6,3 +6,11 @@ terraform.tfvars
 
 # Ignore Terraform cache directory
 .terraform/
+
+# Ignore Terraform plan files
+*.tfplan
+
+# Ignore logs and system-specific files
+*.log
+.DS_Store
+Thumbs.db
