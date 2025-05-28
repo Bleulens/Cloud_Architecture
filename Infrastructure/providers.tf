@@ -15,7 +15,7 @@ terraform {
 
 # Define required Terraform version
 terraform {
-  required_version = "~> 1.3.7" # Ensures Terraform version 1.3.x
+  required_version = "~> 1.12.1" # Ensures Terraform version 1.3.x
 }
 
 
