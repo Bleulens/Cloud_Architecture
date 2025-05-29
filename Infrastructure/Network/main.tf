@@ -7,19 +7,38 @@ module "vpc" {
 }
 
 # ---------------------------------------
-# Call the Subnet Module
+# Public and Private Subnets
 # ---------------------------------------
-module "subnets" {
-  source         = "../modules/network/subnets" # ✅ Path to subnets module
+module "public_subnets" {
+  source         = "../modules/network/subnets"
   vpc_id         = module.vpc.vpc_id
-  subnet_configs = var.subnet_configs
+  subnet_configs = var.public_subnet_configs # ✅ Define public subnet CIDRs
 }
 
 # ---------------------------------------
-# Call the Routing Module
+# Public Route Table
 # ---------------------------------------
-module "routing" {
-  source        = "../modules/network/route_tables" # ✅ Path to routing module
+module "public_routing" {
+  source        = "../modules/network/route_tables"
   vpc_id        = module.vpc.vpc_id
-  route_entries = var.route_entries
+  subnet        = module.subnets.public_subnet_ids
+  route_entries = var.route_entries # ✅ Define public routes
+}
+
+# ---------------------------------------
+# Private Route Table
+# ---------------------------------------
+module "private_routing" {
+  source        = "../modules/network/route_tables"
+  vpc_id        = module.vpc.vpc_id
+  subnet        = module.subnets.private_subnet_ids
+  route_entries = var.route_entries # ✅ Define private routes
+}
+
+# ---------------------------------------
+# Internet Gateway
+# ---------------------------------------
+module "igw" {
+  source = "../modules/network/internet_gateway"
+  vpc_id = module.vpc.vpc_id
 }

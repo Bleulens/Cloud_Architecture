@@ -2,19 +2,34 @@
 # AWS Subnet Module: Dynamic Subnet Creation
 # ================================
 
-# Creates subnets dynamically based on the provided configuration map.
-resource "aws_subnet" "dynamic_subnets" {
-  for_each = var.subnet_configs # Iterates through the map of subnet definitions.
+# Creates public subnets dynamically based on the provided configuration map.
+resource "aws_subnet" "public_subnets" {
+  for_each = var.public_subnet_configs # Loops over each public subnet definition.
 
-  vpc_id                  = aws_vpc.main.id              # Associates the subnet with the main VPC.
-  cidr_block              = each.value.cidr_block        # Defines the subnet’s range based on provided map values.
-  availability_zone       = each.value.availability_zone # Deploys the subnet in the specified AWS Availability Zone.
-  map_public_ip_on_launch = each.value.is_public         # Controls whether instances launched in this subnet get a public IP.
+  vpc_id                  = aws_vpc.main.id              # Associates subnets with the main VPC.
+  cidr_block              = each.value.cidr_block        # Defines subnet range.
+  availability_zone       = each.value.availability_zone # Ensures distribution across AZs.
+  map_public_ip_on_launch = true                         # Public subnets allow instances to receive public IPs.
 
-  # Tags ensure clear identification of subnets and their purpose.
-  # Each subnet is dynamically named and categorized as Public or Private.
+  # Tags ensure each subnet is identifiable and categorized appropriately.
   tags = merge(var.default_tags, {
-    Name = "Subnet-${each.key}"                        # Creates a unique name formatted as "Subnet-<key>"
-    Type = each.value.is_public ? "Public" : "Private" # Explicitly tags subnets as Public or Private.
+    Name = "Public-Subnet-${each.key}" # Dynamically names each public subnet.
+    Type = "Public"                    # Explicitly marks the subnet as public.
+  })
+}
+
+# Creates private subnets dynamically based on the provided configuration map.
+resource "aws_subnet" "private_subnets" {
+  for_each = var.private_subnet_configs # Loops over each private subnet definition.
+
+  vpc_id                  = aws_vpc.main.id              # Associates subnets with the main VPC.
+  cidr_block              = each.value.cidr_block        # Defines subnet range.
+  availability_zone       = each.value.availability_zone # Ensures distribution across AZs.
+  map_public_ip_on_launch = false                        # Private subnets do not receive public IPs.
+
+  # Tags ensure each subnet is identifiable and categorized appropriately.
+  tags = merge(var.default_tags, {
+    Name = "Private-Subnet-${each.key}" # Dynamically names each private subnet.
+    Type = "Private"                    # Explicitly marks the subnet as private.
   })
 }

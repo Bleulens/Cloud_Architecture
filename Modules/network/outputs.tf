@@ -25,6 +25,6 @@ output "internet_gateway_id" {
 # Outputs the NAT Gateway ID (if created).
 output "nat_gateway_id" {
   description = "ID of the NAT Gateway"
-  value       = var.create_nat_gateway ? aws_nat_gateway.nat[0].id : null
+  value       = var.create_nat_gateway ? aws_nat_gateway.ngw[0].id : null
 }
 

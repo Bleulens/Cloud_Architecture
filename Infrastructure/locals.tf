@@ -4,7 +4,7 @@ locals {
 
 locals {
   default_tags = {
-    Environment = "dev"
+    Environment = var.environment
     Owner       = "Marvin"
     CreatedAt   = local.created_at # Reference the timestamp
   }
