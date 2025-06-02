@@ -34,7 +34,7 @@
     {
       "label": "Run Cleanup Script",
       "type": "shell",
-      "command": "bash cleanup.sh 2> ${workspaceFolder}/logs/error.log | tee ${workspaceFolder}/logs/cleanup.log",
+      "command": "bash cleanup.sh 2> >(tee -a ${workspaceFolder}/logs/error.log) | tee -a ${workspaceFolder}/logs/cleanup.log",
       "problemMatcher": []
       // Executes a cleanup script to remove unused or orphaned resources.
       // This helps maintain a clean cloud environment.
