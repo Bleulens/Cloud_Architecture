@@ -4,7 +4,7 @@
 resource "aws_security_group" "this" {
   name        = var.name        # Security group name, provided via a variable
   description = var.description # A brief description of what this SG is for
-  vpc_id      = var.vpc_id      # Associate the SG with a specific VPC
+  vpc_id      = var.vpc_id      # Associate the SG with a specific VPCdr
 
   # Dynamically create ingress (incoming) rules
   # Each rule in var.ingress_rules is processed using a dynamic block

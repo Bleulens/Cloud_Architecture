@@ -10,7 +10,9 @@ resource "aws_api_gateway_rest_api" "rest_api" {
   }
 
   # Merges predefined global tags (`default_tags`) with the API-specific tag for easier resource tracking.
-  tags = merge(var.default_tags, { "Name" = var.api_name })
+  tags = merge(var.default_tags, {
+    "Name" = var.api_name
+  })
 }
 
 # Defines an AWS API Gateway HTTP API.

@@ -11,6 +11,11 @@ variable "description" {
   type        = string
 }
 
+variable "public_subnet_cidr" {
+  description = "CIDR block for public subnets"
+  type        = list(string) # If passing multiple CIDR blocks
+}
+
 variable "vpc_id" {
   description = "VPC ID for the security group" # Every security group must be associated with a VPC
   type        = string
@@ -28,7 +33,12 @@ variable "ingress_rules" {
 
 variable "egress_rules" {
   description = "List of egress (outgoing) rules for the security group"
-  type        = list(map(string)) # Defines outbound traffic permissions
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string) # This ensures cidr_blocks is explicitly a list of strings
+  }))
 }
 
 # Defines a standard set of tags to be applied across all Terraform-managed resources.

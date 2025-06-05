@@ -13,13 +13,18 @@ output "vpc_id" {
 # Output IDs of public subnets for use by other modules (e.g., compute, security)
 output "public_subnet_ids" {
   description = "List of public subnet IDs"
-  value       = module.public_subnets.public_subnet_ids
+  value       = module.subnets.public_subnet_ids
 }
 
 # Output IDs of private subnets for internal resources
 output "private_subnet_ids" {
   description = "List of private subnet IDs"
-  value       = module.private_subnets.private_subnet_ids
+  value       = module.subnets.private_subnet_ids
+}
+
+output "public_subnet_cidr" {
+  description = "CIDR block of the public subnet"
+  value       = module.subnets.public_subnet_cidr
 }
 
 # Output Internet Gateway ID for reference in routing configurations

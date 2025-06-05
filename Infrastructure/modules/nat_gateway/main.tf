@@ -7,7 +7,7 @@ resource "aws_nat_gateway" "nat" {
   count = var.create_nat_gateway ? 1 : 0 # NAT Gateway is optional (disabled in Free Tier).
 
   allocation_id = aws_eip.nat_eip[0].id
-  subnet_id     = aws_subnet.dynamic_subnets[var.nat_subnet_id].id
+  subnet_id     = var.nat_subnet_id_for_nat_gateway
 
   tags = merge(var.default_tags, {
     Name = "NAT Gateway"

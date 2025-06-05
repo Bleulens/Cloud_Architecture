@@ -58,3 +58,4 @@ variable "lambda_invoke_arn" {
 variable "default_tags" {
   type = map(string)
 }
+

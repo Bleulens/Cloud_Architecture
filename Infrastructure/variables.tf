@@ -20,6 +20,7 @@ variable "public_subnet_configs" {
   type = map(object({
     cidr_block        = string
     availability_zone = string
+    layer_name        = string
   }))
 
   validation {
@@ -32,6 +33,7 @@ variable "private_subnet_configs" {
   type = map(object({
     cidr_block        = string
     availability_zone = string
+    layer_name        = string
   }))
 
   validation {
@@ -78,6 +80,13 @@ variable "deploy_database" {
   description = "Flag to determine whether to deploy the database resources"
   type        = bool
   default     = false
+}
+
+# Defines a standard set of tags to be applied across all Terraform-managed resources.
+# This variable allows consistent tagging for better organization, cost tracking, and automation.
+variable "default_tags" {
+  description = "Standard tags passed from root module"
+  type        = map(string)
 }
 
 # ---------------------------------------

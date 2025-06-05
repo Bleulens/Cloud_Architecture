@@ -5,7 +5,9 @@
 # Creates a VPC (Virtual Private Cloud)
 # This serves as the primary network environment where AWS resources will be deployed.
 resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr_block # Defines the overall IP range of the VPC.
+  cidr_block           = var.vpc_cidr_block # Defines the overall IP range of the VPC.
+  enable_dns_hostnames = var.enable_dns_hostnames
+  enable_dns_support   = var.enable_dns_support
 
   # Tags help with organizing and identifying resources across AWS.
   tags = merge(var.default_tags, {

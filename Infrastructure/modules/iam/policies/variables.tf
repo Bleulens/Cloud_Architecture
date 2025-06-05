@@ -1,15 +1,3 @@
-# IAM Role Name
-variable "role_name" {
-  description = "Name of the IAM role"
-  type        = string
-}
-
-# Defines which AWS service can assume this IAM role
-variable "assumed_by_service" {
-  description = "AWS service allowed to assume this role"
-  type        = string
-}
-
 # IAM Policy Name
 variable "policy_name" {
   description = "Name of the IAM policy"
