@@ -33,3 +33,8 @@ resource "aws_subnet" "private_subnets" {
   })
 }
 
+resource "aws_db_subnet_group" "this" {
+  name       = "${var.vpc_name}-subnet-group"
+  subnet_ids = values(aws_subnet.private_subnets)[*].id # ✅ Extract values from map
+  tags       = var.default_tags
+}

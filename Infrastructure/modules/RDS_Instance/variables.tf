@@ -47,13 +47,14 @@ variable "allocated_storage" {
 
 # List of security group IDs associated with the RDS instance.
 # Ensures that only authorized resources can connect to the database.
-variable "security_group_ids" {
-  type = list(string)
+variable "vpc_security_group_ids" {
+  type        = list(string) # ✅ Allows multiple SGs
+  description = "List of security groups associated with the RDS instance"
 }
 
 # Specifies the name of the subnet group.
 # Determines which subnets the RDS instance can reside in for better availability.
-variable "subnet_group" {
+variable "subnet_group_name" {
   type = string
 }
 

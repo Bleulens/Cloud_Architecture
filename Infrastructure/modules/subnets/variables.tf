@@ -31,6 +31,11 @@ variable "private_subnet_configs" {
   }
 }
 
+variable "vpc_name" {
+  description = "The name of the VPC, passed from the VPC module"
+  type        = string
+}
+
 # Defines a standard set of tags to be applied across all Terraform-managed resources.
 variable "default_tags" {
   description = "Standard tags passed from root module"

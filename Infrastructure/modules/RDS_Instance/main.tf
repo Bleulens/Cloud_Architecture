@@ -22,10 +22,10 @@ resource "aws_db_instance" "default" {
   password = var.db_password
 
   # Associates the RDS instance with security groups to control access.
-  vpc_security_group_ids = var.security_group_ids
+  vpc_security_group_ids = var.vpc_security_group_ids
 
   # Defines which subnet group the RDS instance will reside in.
-  db_subnet_group_name = var.subnet_group
+  db_subnet_group_name = var.subnet_group_name
 
   # Merges global tags with an additional "Name" tag specific to the RDS instance.
   # Tags are useful for identifying resources, cost tracking, and organization.
