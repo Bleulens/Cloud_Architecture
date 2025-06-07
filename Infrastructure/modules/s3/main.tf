@@ -29,5 +29,5 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
 resource "aws_s3_bucket_policy" "this" {
   count  = var.enable_bucket_policy ? 1 : 0
   bucket = aws_s3_bucket.this.id
-  policy = module.iam.policy_actions
+  policy = module.iam_policies.policy_actions
 }
