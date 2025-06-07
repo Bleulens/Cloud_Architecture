@@ -1,14 +1,19 @@
-module "iam" {
-  source             = "../iam"
-  policy_actions     = var.policy_actions
-  deny_resources     = var.deny_resources
-  deny_actions       = var.deny_actions
-  enable_deny        = var.enable_deny
-  assumed_by_service = var.assumed_by_service
-  policy_resources   = var.policy_resources
-  policy_name        = var.policy_name
+module "iam_roles" {
+  source             = "../iam/roles"
   role_name          = var.role_name
+  assumed_by_service = var.assumed_by_service
   default_tags       = var.default_tags
+}
+
+module "iam_policies" {
+  source           = "../iam/policies"
+  policy_name      = var.policy_name
+  policy_actions   = var.policy_actions
+  policy_resources = var.policy_resources
+  deny_resources   = var.deny_resources
+  deny_actions     = var.deny_actions
+  enable_deny      = var.enable_deny
+  default_tags     = var.default_tags
 }
 
 module "cloud_watch" {
@@ -34,7 +39,7 @@ resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
   function_name = var.function_name
-  role          = module.iam.role_arn
+  role          = module.iam_roles.role_arn
   handler       = var.handler
   runtime       = var.runtime
 
