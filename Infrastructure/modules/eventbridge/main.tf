@@ -21,7 +21,7 @@ resource "aws_cloudwatch_event_target" "this" {
 # ---------------------------------------
 resource "aws_iam_role" "eventbridge_role" {
   count = var.enable_iam_permissions ? 1 : 0 # ✅ Creates IAM role only if permissions are enabled
-  name  = var.iam_role_name                  # ✅ Name of the IAM role
+  name  = var.role_name                      # ✅ Name of the IAM role
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -38,7 +38,7 @@ resource "aws_iam_role" "eventbridge_role" {
 # ---------------------------------------
 resource "aws_iam_policy" "eventbridge_policy" {
   count = var.enable_iam_permissions ? 1 : 0 # ✅ Creates policy only if IAM permissions are enabled
-  name  = var.iam_policy_name                # ✅ Name of the IAM policy
+  name  = var.policy_name                    # ✅ Name of the IAM policy
 
   policy = jsonencode({
     Version = "2012-10-17",

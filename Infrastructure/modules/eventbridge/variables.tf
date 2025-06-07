@@ -52,13 +52,13 @@ variable "enable_iam_permissions" {
   default     = false # ✅ Defaults to disabled to keep IAM usage optional
 }
 
-variable "iam_role_name" {
+variable "role_name" {
   description = "IAM Role name for EventBridge" # ✅ Defines the IAM role name if permissions are enabled
   type        = string
   default     = "eventbridge-role"
 }
 
-variable "iam_policy_name" {
+variable "policy_name" {
   description = "IAM Policy name for EventBridge" # ✅ Defines the policy name for granting permissions to EventBridge
   type        = string
   default     = "eventbridge-policy"
