@@ -7,9 +7,9 @@ data "aws_ssm_parameter" "latest_ami" {
 resource "aws_instance" "instances" {
   count = var.instance_count # Number of instances per deployment
 
-  ami           = data.aws_ssm_parameter.latest_ami.value # Dynamically pulls latest Amazon Linux AMI
-  instance_type = var.instance_type                       # Allows projects to define their own instance type
-  subnet_id     = var.subnet_id                           # Ensures instances are placed in a valid VPC subnet
+  ami           = data.aws_ssm_parameter.latest_ami.value                                                                                                                                                                                          # Dynamically pulls latest Amazon Linux AMI
+  instance_type = var.instance_type                                                                                                                                                                                                                # Allows projects to define their own instance type
+  subnet_id     = var.subnet_type == "private" ? values(module.subnet.private_subnet_ids)[count.index % length(module.subnet.private_subnet_ids)] : values(module.subnet.public_subnet_ids)[count.index % length(module.subnet.public_subnet_ids)] # Assigns instances to private or public subnets based on subnet_type variable
 
   # Combines the standard tags from var.default_tags with a dynamic Name tag using merge function
   tags = merge(var.default_tags, {
