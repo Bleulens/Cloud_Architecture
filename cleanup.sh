@@ -21,12 +21,6 @@ fi
 if [ -d "${WORKSPACE_FOLDER}/logs" ]; then
     echo "🗑 Cleaning up logs..."
     rm -rfv "${WORKSPACE_FOLDER}/logs/*"
-fi
-
-# 4️⃣ Verify if logs directory exists before attempting cleanup
-if [ -d "${WORKSPACE_FOLDER}/logs" ]; then
-    echo "🗑 Cleaning up logs..."
-    rm -rf "${WORKSPACE_FOLDER}/logs/*"
 else
     echo "🤷 No logs directory found—skipping log cleanup."
 fi
